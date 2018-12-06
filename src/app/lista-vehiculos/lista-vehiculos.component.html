@@ -1,3 +1,12 @@
-<p>
-  lista-vehiculos works!
-</p>
+<h1>Vehiculos</h1>
+
+<ul>
+  <li *ngFor="let vehiculo of vehiculos$">
+    <a routerLink="/detalles/{{vehiculo.placa}}">{{ vehiculo.placa }}</a>
+    <ul>
+      <i *ngIf ="vehiculo.tipo == 'carro'" class="material-icons">directions_car</i>
+      <i *ngIf ="vehiculo.tipo == 'moto'" class="material-icons">directions_bike</i>  
+      <li><p>{{ vehiculo.fechaIngreso }}</p></li>
+    </ul>
+  </li>
+</ul>
