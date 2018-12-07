@@ -1,3 +1,12 @@
-<p>
-  formulario works!
-</p>
+<h1>Ingresar Vehiculo</h1>
+<form formGroup="vehiculoForm" (ngSubmit)="onSubmit()">
+    <input type="text" id="placa" formControlName="placa" placeholder="Placa" required>
+    <input type="text" id="tipo" formControlName="tipo" placeholder="Tipo" required>
+    <input type="number" id="cilindraje" formControlName="cilindraje" placeholder="Cilindraje" required>
+    <input type="number" id="modelo" formControlName="modelo" placeholder="Modelo">
+    <input type="text" id="color" formControlName="color" placeholder="Color" required>
+    <input type="text" id="clase" formControlName="clase" placeholder="Clase" required>
+    <input type="text" id="marca" formControlName="marca" placeholder="Marca" required>
+    <button type="button" [disabled]="!vehiculoForm.valid">Guardar Registro</button>
+</form>
+

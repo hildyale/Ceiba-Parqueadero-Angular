@@ -5,18 +5,10 @@ import { DetallesVehiculoComponent } from './detalles-vehiculo/detalles-vehiculo
 import { FormularioComponent } from './formulario/formulario.component';
 
 const routes: Routes = [
-  {
-    path:'',
-    component: FormularioComponent
-  },
-  {
-    path:'detalles/:placa',
-    component: DetallesVehiculoComponent
-  },
-  {
-    path:'lista',
-    component: ListaVehiculosComponent
-  }
+  { path:'', component: FormularioComponent },
+  { path:'detalles/:placa', component: DetallesVehiculoComponent },
+  { path:'detalles', component: DetallesVehiculoComponent },
+  { path:'lista', component: ListaVehiculosComponent }
 ];
 
 @NgModule({

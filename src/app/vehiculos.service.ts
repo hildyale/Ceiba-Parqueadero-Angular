@@ -12,4 +12,12 @@ export class VehiculosService {
     return this.http.get(this.url+"detalles");
   }
 
+  registrarVehiculo(body){
+    return this.http.post(this.url,body);
+  }
+
+  salidaVehiculos(placa){
+    return this.http.delete(this.url+placa);
+  }
+
 }
