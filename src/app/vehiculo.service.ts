@@ -20,4 +20,8 @@ export class VehiculoService {
   salidaVehiculos(placa){
     return this.http.delete(this.url+placa);
   }
+
+  obtenerTRM(){
+    return this.http.get('http://free.currencyconverterapi.com/api/v5/convert?q=USD_COP&compact=y');
+  }
 }

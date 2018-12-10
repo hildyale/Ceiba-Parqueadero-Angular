@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VehiculoService } from '../vehiculo.service';
+import { DetallesService } from '../detalles.service';
 
 @Component({
   selector: 'app-menu',
@@ -8,10 +9,25 @@ import { VehiculoService } from '../vehiculo.service';
 })
 export class MenuComponent implements OnInit {
 
-  constructor(private vehiculoService: VehiculoService) {}
+  trm: any;
+
+  constructor(private vehiculoService: VehiculoService, private detallesService: DetallesService) {}
 
   ngOnInit() {
-
+    if(this.detallesService.trm){
+      this.trm = this.detallesService.trm
+    }else{
+      this.vehiculoService.obtenerTRM().subscribe(
+        data => {
+          console.log(data)
+          this.trm = data
+          this.trm = this.trm.USD_COP.val
+          this.detallesService.trm = this.trm;
+         }
+        )
+    }
+    
+    
   }
 
 }
