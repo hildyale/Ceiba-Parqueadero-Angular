@@ -1,3 +1,4 @@
+/*
 nav {
     background: #2D2E2E;
     height: 100%;
@@ -13,6 +14,44 @@ nav {
                 color: #fff;
                 padding: 20px;
                 display: block;
+            }
+
+            .activated {
+                background-color: #00a8ff;
+            }
+        }
+    }
+    
+}
+
+*/
+
+
+nav {
+    background: #2D2E2E;
+    width: 100%;
+    
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        padding: 10px;
+        overflow: hidden;
+        li {
+            display: inline-block;
+            padding: 10px;
+            //background: rgba(45, 46, 46, 0.644);
+            //margin: 5px;
+            //border-radius: 10px;
+            a {
+                color: #fff;
+                padding: 5px;
+                text-decoration: none;
+                align-content: center;
+                font-weight: 500;
+                .material-icons {
+                    font-size: 20px;
+                }
             }
 
             .activated {

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { VehiculosService } from '../vehiculos.service';
+import { VehiculoService } from '../vehiculo.service';
 import {Router} from "@angular/router"
 import { DetallesService } from "../detalles.service"
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-lista-vehiculos',
@@ -11,13 +10,19 @@ import { Observable } from 'rxjs';
 })
 export class ListaVehiculosComponent implements OnInit {
 
-  vehiculos$: Object;
+  vehiculos$: any;
+  noResults = false;
 
-  constructor(private vehiculosService: VehiculosService, private router: Router, private detallesServices: DetallesService) { }
+  constructor(private vehiculoService: VehiculoService, private router: Router, private detallesServices: DetallesService) { }
 
   ngOnInit() {
-    this.vehiculosService.obtenerVehiculos().subscribe(
-      data => this.vehiculos$ = data
+    this.vehiculoService.obtenerVehiculos().subscribe(
+      data => {
+        this.vehiculos$ = data
+        if(this.vehiculos$.length === 0){
+          this.noResults = true;
+        }
+      }
     )
   }
 
@@ -26,5 +31,7 @@ export class ListaVehiculosComponent implements OnInit {
     this.detallesServices.serviceData = Object;
     this.router.navigate(['detalles'])
   }
+
+
 
 }

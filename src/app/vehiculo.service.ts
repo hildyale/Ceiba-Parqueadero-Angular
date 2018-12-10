@@ -4,7 +4,8 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class VehiculosService {
+export class VehiculoService {
+  //options = {headers:{'Content-Type':'application/json','responseType': 'text'}};
   url = "http://localhost:8080/vehiculos/";
   constructor(private http: HttpClient) {}
 
@@ -13,11 +14,10 @@ export class VehiculosService {
   }
 
   registrarVehiculo(body){
-    return this.http.post(this.url,body);
+    return this.http.post(this.url,body/*,this.options*/);
   }
 
   salidaVehiculos(placa){
     return this.http.delete(this.url+placa);
   }
-
 }

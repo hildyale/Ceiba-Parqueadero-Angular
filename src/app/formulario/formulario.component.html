@@ -1,12 +1,33 @@
 <h1>Ingresar Vehiculo</h1>
-<form formGroup="vehiculoForm" (ngSubmit)="onSubmit()">
-    <input type="text" id="placa" formControlName="placa" placeholder="Placa" required>
-    <input type="text" id="tipo" formControlName="tipo" placeholder="Tipo" required>
-    <input type="number" id="cilindraje" formControlName="cilindraje" placeholder="Cilindraje" required>
-    <input type="number" id="modelo" formControlName="modelo" placeholder="Modelo">
-    <input type="text" id="color" formControlName="color" placeholder="Color" required>
-    <input type="text" id="clase" formControlName="clase" placeholder="Clase" required>
-    <input type="text" id="marca" formControlName="marca" placeholder="Marca" required>
-    <button type="button" [disabled]="!vehiculoForm.valid">Guardar Registro</button>
+<form [formGroup]="vehiculoForm" (ngSubmit)="onSubmit()">
+    <div class="formControl">
+        <input type="text" id="placa" formControlName="placa" placeholder="Placa" required>
+        <label *ngIf="!vehiculoForm.get('placa').valid" [ngClass] = "'error'"> Placa requerida </label>
+    </div>
+    <div class="formControl">
+        Tipo:
+        <input type="radio" formControlName="tipo" value="carro"> Carro
+        <input type="radio" formControlName="tipo" value="moto" > Moto
+    </div>
+    <div class="formControl">
+        <input type="number" id="cilindraje" formControlName="cilindraje" placeholder="Cilindraje" required>
+        <label *ngIf="!vehiculoForm.get('cilindraje').valid" [ngClass] = "'error'"> Cilindraje requerido </label>
+    </div>
+    <div class="formControl">
+        <input type="number" id="modelo" formControlName="modelo" placeholder="Modelo">
+    </div>
+    <div class="formControl">
+        <input type="text" id="color" formControlName="color" placeholder="Color" required>
+        <label *ngIf="!vehiculoForm.get('color').valid" [ngClass] = "'error'"> Color requerida </label>
+    </div>
+    <div class="formControl">
+        <input type="text" id="clase" formControlName="clase" placeholder="Clase" required>
+        <label *ngIf="!vehiculoForm.get('clase').valid" [ngClass] = "'error'"> Clase requerida </label>
+    </div>
+    <div class="formControl">
+        <input type="text" id="marca" formControlName="marca" placeholder="Marca" required>
+        <label *ngIf="!vehiculoForm.get('marca').valid" [ngClass] = "'error'"> Marca requerida </label>
+    </div>
+    <button type="submit" [disabled]="!vehiculoForm.valid">Guardar Registro</button>
 </form>
 

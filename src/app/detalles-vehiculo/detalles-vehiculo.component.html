@@ -8,7 +8,7 @@
   <li><strong>Modelo: </strong> {{vehiculo.modelo}}</li>
   <li><strong>Color: </strong> {{vehiculo.color}}</li>
   <li><strong>Clase: </strong> {{vehiculo.clase}}</li>
-  <li><strong>FechaIngreso: </strong> {{vehiculo.fechaIngreso}}</li>
+  <li><strong>FechaIngreso: </strong> {{vehiculo.fechaIngreso| date: 'medium'}}</li>
 </ul>
 
 <button (click)="salidaVehiculo()">Salida Vehiculo</button>
