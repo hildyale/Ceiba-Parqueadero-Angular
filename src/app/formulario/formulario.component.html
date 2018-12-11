@@ -2,7 +2,7 @@
 <form [formGroup]="vehiculoForm" (ngSubmit)="onSubmit()">
     <div class="formControl">
         <input type="text" id="placa" formControlName="placa" placeholder="Placa" required>
-        <label *ngIf="!vehiculoForm.get('placa').valid" [ngClass] = "'error'"> Placa requerida </label>
+        <label class="error" *ngIf="vehiculoForm.get('placa').hasError('required')" [ngClass] = "'error'"> Placa requerida </label>
     </div>
     <div class="formControl">
         Tipo:
@@ -11,22 +11,25 @@
     </div>
     <div class="formControl">
         <input type="number" id="cilindraje" formControlName="cilindraje" placeholder="Cilindraje" required>
-        <label *ngIf="!vehiculoForm.get('cilindraje').valid" [ngClass] = "'error'"> Cilindraje requerido </label>
+        <label class="error" *ngIf="vehiculoForm.get('cilindraje').hasError('required')" [ngClass] = "'error'"> Cilindraje requerido </label>
     </div>
     <div class="formControl">
         <input type="number" id="modelo" formControlName="modelo" placeholder="Modelo">
     </div>
     <div class="formControl">
-        <input type="text" id="color" formControlName="color" placeholder="Color" required>
-        <label *ngIf="!vehiculoForm.get('color').valid" [ngClass] = "'error'"> Color requerida </label>
+        <input type="text" id="color" formControlName="color" placeholder="Color" ng-pattern="/^[a-zA-Z]*$/" required>
+        <label class="error" *ngIf="vehiculoForm.get('color').hasError('required')" [ngClass] = "'error'"> Color requerida </label>
+        <label class="error" *ngIf="vehiculoForm.get('color').hasError('pattern')" [ngClass] = "'error'"> Solo se admiten letras </label>
     </div>
     <div class="formControl">
         <input type="text" id="clase" formControlName="clase" placeholder="Clase" required>
-        <label *ngIf="!vehiculoForm.get('clase').valid" [ngClass] = "'error'"> Clase requerida </label>
+        <label class="error" *ngIf="vehiculoForm.get('clase').hasError('required')" [ngClass] = "'error'"> Clase requerida </label>
+        <label class="error" *ngIf="vehiculoForm.get('clase').hasError('pattern')" [ngClass] = "'error'"> Solo se admiten letras </label>
     </div>
     <div class="formControl">
         <input type="text" id="marca" formControlName="marca" placeholder="Marca" required>
-        <label *ngIf="!vehiculoForm.get('marca').valid" [ngClass] = "'error'"> Marca requerida </label>
+        <label class="error" *ngIf="vehiculoForm.get('marca').hasError('required')" [ngClass] = "'error'"> Marca requerida </label>
+        <label class="error" *ngIf="vehiculoForm.get('marca').hasError('pattern')" [ngClass] = "'error'"> Solo se admiten letras </label>
     </div>
     <button type="submit" [disabled]="!vehiculoForm.valid">Guardar Registro</button>
 </form>

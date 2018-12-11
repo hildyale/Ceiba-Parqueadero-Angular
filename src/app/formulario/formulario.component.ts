@@ -17,9 +17,9 @@ export class FormularioComponent implements OnInit {
     tipo: new FormControl('carro'),
     cilindraje: new FormControl('', [Validators.required, Validators.maxLength(40)]),
     modelo: new FormControl('', [Validators.maxLength(40)]),
-    color: new FormControl('', [Validators.required, Validators.maxLength(40)]),
-    clase: new FormControl('', [Validators.required, Validators.maxLength(40)]),
-    marca: new FormControl('',[Validators.required, Validators.maxLength(40)])
+    color: new FormControl('', [Validators.required, Validators.maxLength(40),Validators.pattern('^[a-zA-Z]*$')]),
+    clase: new FormControl('', [Validators.required, Validators.maxLength(40),Validators.pattern('^[a-zA-Z]*$')]),
+    marca: new FormControl('',[Validators.required, Validators.maxLength(40),Validators.pattern('^[a-zA-Z]*$')])
   });
 
   constructor(private vehiculoService : VehiculoService, private router: Router) { }
