@@ -6,15 +6,34 @@ body {
     height: 100vh;
 }
 
+@media screen and (max-width: 930px) {
+    #content {
+        margin-top: 50px;
+    }
+}
+
+@media screen and (max-width: 727px) {
+    #content {
+        margin-top: 80px;
+    }
+}
+
+@media screen and (max-width: 438px) {
+    #content {
+        margin-top: 110px;
+    }
+}
+
+
 #container {
    display: grid;
    //grid-template-columns: 70px auto;
-   grid-template-rows:30px auto;
+   grid-template-rows:50px auto;
    height: 100%;
 
    #content {
        padding: 3%;
-
+       
        ul {
            list-style-type: none;
            margin:0;padding:0;

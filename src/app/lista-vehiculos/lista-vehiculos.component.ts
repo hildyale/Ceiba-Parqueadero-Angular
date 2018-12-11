@@ -18,6 +18,7 @@ export class ListaVehiculosComponent implements OnInit {
   ngOnInit() {
     this.vehiculoService.obtenerVehiculos().subscribe(
       data => {
+        
         this.vehiculos$ = data
         if(this.vehiculos$.length === 0){
           this.noResults = true;
