@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl , Validators} from '@angular/forms';
+import { FormBuilder,FormGroup,Validators} from '@angular/forms';
 import { VehiculoService } from '../vehiculo.service';
 import {Router} from "@angular/router";
 import swal from 'sweetalert';
@@ -12,29 +12,37 @@ import swal from 'sweetalert';
 export class FormularioComponent implements OnInit {
 
   respuesta$: any = {messsage:""};
-  vehiculoForm = new FormGroup({
-    placa: new FormControl('', [Validators.required, Validators.maxLength(40)]),
-    tipo: new FormControl('carro'),
-    cilindraje: new FormControl('', [Validators.required, Validators.maxLength(40)]),
-    modelo: new FormControl('', [Validators.maxLength(40)]),
-    color: new FormControl('', [Validators.required, Validators.maxLength(40),Validators.pattern('^[a-zA-Z]*$')]),
-    clase: new FormControl('', [Validators.required, Validators.maxLength(40),Validators.pattern('^[a-zA-Z]*$')]),
-    marca: new FormControl('',[Validators.required, Validators.maxLength(40),Validators.pattern('^[a-zA-Z]*$')])
-  });
+  vehiculoForm: FormGroup;
+  submitted = false;
+  valor = "";
 
-  constructor(private vehiculoService : VehiculoService, private router: Router) { }
+  constructor(private vehiculoService : VehiculoService, private router: Router,private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.vehiculoForm = this.formBuilder.group({
+      placa: ['', [Validators.required,Validators.maxLength(40),Validators.minLength(6),Validators.pattern('^[a-zA-Z0-9]*$')]],
+      tipo: ['carro'],
+      cilindraje: ['', [Validators.required,Validators.pattern('^[0-9]*$')]],
+      modelo: ['', [Validators.required,Validators.pattern('^[0-9]*$')]],
+      color: ['', [Validators.required,Validators.maxLength(40),Validators.pattern('^[a-zA-Z]*$')]],
+      clase: ['', [Validators.required,Validators.maxLength(40),Validators.pattern('^[a-zA-Z]*$')]],
+      marca: ['', [Validators.required,Validators.maxLength(40),Validators.pattern('^[a-zA-Z]*$')]]
+  });
   }
 
+  get form() { return this.vehiculoForm.controls; }
+
   onSubmit() {
-    // TODO: Use EventEmitter with form value
+    this.submitted = true;
+    if (this.vehiculoForm.invalid) {
+        return;
+    }
     console.warn(this.vehiculoForm.value);
     this.vehiculoService.registrarVehiculo(this.vehiculoForm.value).subscribe(
       (data) => {
         
         this.respuesta$ =  data;
-        swal( "",this.respuesta$,"success").then(()=>{
+        swal( this.respuesta$,"","success").then(()=>{
           this.router.navigate(['lista']); 
         });
         console.log("%c data","color:orange;font-size:16px;") 
@@ -48,6 +56,31 @@ export class FormularioComponent implements OnInit {
           //this.router.navigate(['lista']); 
         });
     });
+  }
+
+
+  soloLetras($event: any) {
+    const pattern = /^[a-zA-Z]*$/;
+    let inputChar = $event.key;
+    if (!pattern.test(inputChar)) {
+      $event.preventDefault();
+    }
+  }
+
+  soloNumerosYLetras($event: any) {
+    const pattern = /^[a-zA-Z0-9]*$/;
+    let inputChar = $event.key;
+    if (!pattern.test(inputChar)) {
+      $event.preventDefault();
+    }
+  }
+
+  soloNumeros($event: any) {
+    const pattern = /^[0-9]*$/;
+    let inputChar = $event.key;
+    if (!pattern.test(inputChar)) {
+      $event.preventDefault();
+    }
   }
 
 }

@@ -1,36 +1,57 @@
 <h1>Ingresar Vehiculo</h1>
 <form [formGroup]="vehiculoForm" (ngSubmit)="onSubmit()">
     <div class="formControl">
-        <input type="text" id="placa" formControlName="placa" placeholder="Placa" required>
-        <label class="error" *ngIf="vehiculoForm.get('placa').hasError('required')" [ngClass] = "'error'"> Placa requerida </label>
+        <input type="text" id="placa" formControlName="placa" (keypress)="soloNumerosYLetras($event)" placeholder="Placa">
+        <span *ngIf="submitted && form.placa.errors">
+            <label class="error" *ngIf="form.placa.errors.required">placa requerida</label>
+            <label class="error" *ngIf="form.placa.errors.maxLength" > maximo 40 caracteres </label>
+            <label class="error" *ngIf="form.placa.errors.minLength" > minimo 6 caracteres </label>
+            <label class="error" *ngIf="form.placa.errors.pattern"> solo se admiten letras o numeros</label>
+        </span>
     </div>
     <div class="formControl">
         Tipo:
-        <input type="radio" formControlName="tipo" value="carro"> Carro
-        <input type="radio" formControlName="tipo" value="moto" > Moto
+        <input type="radio" id="carro" formControlName="tipo" value="carro"> Carro
+        <input type="radio" id="moto" formControlName="tipo" value="moto" > Moto
     </div>
     <div class="formControl">
-        <input type="number" id="cilindraje" formControlName="cilindraje" placeholder="Cilindraje" required>
-        <label class="error" *ngIf="vehiculoForm.get('cilindraje').hasError('required')" [ngClass] = "'error'"> Cilindraje requerido </label>
+        <input type="number" id="cilindraje" formControlName="cilindraje" (keypress)="soloNumeros($event)" placeholder="Cilindraje">
+        <span *ngIf="submitted && form.cilindraje.errors">
+            <label class="error" *ngIf="form.cilindraje.errors.required" > cilindraje requerido </label>
+            <label class="error" *ngIf="form.cilindraje.errors.pattern"> solo se admiten numeros enteros</label>
+        </span>
     </div>
     <div class="formControl">
-        <input type="number" id="modelo" formControlName="modelo" placeholder="Modelo">
+        <input type="number" id="modelo" formControlName="modelo" (keypress)="soloNumeros($event)" placeholder="Modelo">
+        <span *ngIf="submitted && form.modelo.errors">
+            <label class="error" *ngIf="form.modelo.errors.required" > cilindraje requerido </label>
+            <label class="error" *ngIf="form.modelo.errors.pattern"> solo se admiten numeros enteros</label>
+        </span>
     </div>
     <div class="formControl">
-        <input type="text" id="color" formControlName="color" placeholder="Color" ng-pattern="/^[a-zA-Z]*$/" required>
-        <label class="error" *ngIf="vehiculoForm.get('color').hasError('required')" [ngClass] = "'error'"> Color requerida </label>
-        <label class="error" *ngIf="vehiculoForm.get('color').hasError('pattern')" [ngClass] = "'error'"> Solo se admiten letras </label>
+        <input type="text" id="color" formControlName="color" (keypress)="soloLetras($event)" placeholder="Color">
+        <span *ngIf="submitted && form.color.errors">
+            <label class="error" *ngIf="form.color.errors.required"> color requerido </label>
+            <label class="error" *ngIf="form.color.errors.pattern"> solo se admiten letras </label>
+            <label class="error" *ngIf="form.color.errors.maxlength" > maximo 40 caracteres </label>
+        </span>
     </div>
     <div class="formControl">
-        <input type="text" id="clase" formControlName="clase" placeholder="Clase" required>
-        <label class="error" *ngIf="vehiculoForm.get('clase').hasError('required')" [ngClass] = "'error'"> Clase requerida </label>
-        <label class="error" *ngIf="vehiculoForm.get('clase').hasError('pattern')" [ngClass] = "'error'"> Solo se admiten letras </label>
+        <input type="text" id="clase" formControlName="clase" (keypress)="soloLetras($event)" placeholder="Clase">
+        <span *ngIf="submitted && form.clase.errors">
+            <label class="error" *ngIf="form.clase.errors.required"> clase requerida </label>
+            <label class="error" *ngIf="form.clase.errors.pattern"> solo se admiten letras </label>
+            <label class="error" *ngIf="form.clase.errors.maxlength" > maximo 40 caracteres </label>
+        </span>
     </div>
     <div class="formControl">
-        <input type="text" id="marca" formControlName="marca" placeholder="Marca" required>
-        <label class="error" *ngIf="vehiculoForm.get('marca').hasError('required')" [ngClass] = "'error'"> Marca requerida </label>
-        <label class="error" *ngIf="vehiculoForm.get('marca').hasError('pattern')" [ngClass] = "'error'"> Solo se admiten letras </label>
+        <input type="text" id="marca" formControlName="marca" (keypress)="soloLetras($event)" placeholder="Marca" pattern="[A-Za-z0-9]+">
+        <span *ngIf="submitted && form.marca.errors">
+            <label class="error" *ngIf="form.marca.errors.required"> marca requerida </label>
+            <label class="error" *ngIf="form.marca.errors.pattern"> solo se admiten letras </label>
+            <label class="error" *ngIf="form.marca.errors.maxlength" > maximo 40 caracteres </label>
+        </span>
     </div>
-    <button type="submit" [disabled]="!vehiculoForm.valid">Guardar Registro</button>
+    <button type="submit" id="guardar" [disabled]="loading">Guardar Registro</button>
 </form>
 

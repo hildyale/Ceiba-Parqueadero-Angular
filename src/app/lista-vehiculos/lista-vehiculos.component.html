@@ -1,6 +1,6 @@
 <h1>Vehiculos</h1>
 <ul>
-  <li *ngFor="let vehiculo of vehiculos$" (click)="detalles(vehiculo)">
+  <li *ngFor="let vehiculo of vehiculos$" (click)="detalles(vehiculo)" id={{vehiculo.placa}}>
     <p >Placa: <a>{{ vehiculo.placa }}</a></p>
     <ul>
       <i *ngIf ="vehiculo.tipo == 'carro'" class="material-icons">directions_car</i>
