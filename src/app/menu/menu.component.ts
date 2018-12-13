@@ -19,7 +19,6 @@ export class MenuComponent implements OnInit {
     }else{
       this.vehiculoService.obtenerTRM().subscribe(
         data => {
-          console.log(data)
           this.trm = data
           this.trm = this.trm.USD_COP.val
           this.detallesService.trm = this.trm;

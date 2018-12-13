@@ -4,8 +4,8 @@
         <input type="text" id="placa" formControlName="placa" (keypress)="soloNumerosYLetras($event)" placeholder="Placa">
         <span *ngIf="submitted && form.placa.errors">
             <label class="error" *ngIf="form.placa.errors.required">placa requerida</label>
-            <label class="error" *ngIf="form.placa.errors.maxLength" > maximo 40 caracteres </label>
-            <label class="error" *ngIf="form.placa.errors.minLength" > minimo 6 caracteres </label>
+            <label class="error" *ngIf="form.placa.errors.maxlength" > maximo 40 caracteres </label>
+            <label class="error" *ngIf="form.placa.errors.minlength" > minimo 6 caracteres </label>
             <label class="error" *ngIf="form.placa.errors.pattern"> solo se admiten letras o numeros</label>
         </span>
     </div>
@@ -52,6 +52,6 @@
             <label class="error" *ngIf="form.marca.errors.maxlength" > maximo 40 caracteres </label>
         </span>
     </div>
-    <button type="submit" id="guardar" [disabled]="loading">Guardar Registro</button>
+    <button type="submit" id="guardar" [disabled]="loading">Guardar Registro<img [ngClass]="{'show':loading,'hidden':!loading}" class="loading" src="../../assets/loading.svg"></button>
 </form>
 

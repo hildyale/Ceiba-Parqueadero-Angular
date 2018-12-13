@@ -11,5 +11,5 @@
   <li><strong>FechaIngreso: </strong> {{vehiculo.fechaIngreso| date: 'medium'}}</li>
 </ul>
 
-<button id="salida" (click)="salidaVehiculo()">Salida Vehiculo</button>
-<p>{{respuesta$.message}}</p>
+<button id="salida" (click)="salidaVehiculo()">Salida Vehiculo <img [ngClass]="{'show':loading,'hidden':!loading}" class="loading" src="../../assets/loading.svg"></button>
+<p>{{respuesta.message}}</p>

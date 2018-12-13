@@ -11,10 +11,11 @@ import swal from 'sweetalert';
 })
 export class FormularioComponent implements OnInit {
 
-  respuesta$: any = {messsage:""};
+  respuesta: any = {messsage:""};
   vehiculoForm: FormGroup;
   submitted = false;
   valor = "";
+  loading = false;
 
   constructor(private vehiculoService : VehiculoService, private router: Router,private formBuilder: FormBuilder) { }
 
@@ -38,23 +39,30 @@ export class FormularioComponent implements OnInit {
         return;
     }
     console.warn(this.vehiculoForm.value);
+    this.loading = true;
     this.vehiculoService.registrarVehiculo(this.vehiculoForm.value).subscribe(
       (data) => {
-        
-        this.respuesta$ =  data;
-        swal( this.respuesta$,"","success").then(()=>{
+        this.respuesta =  data;
+        swal( this.respuesta,"","success").then(()=>{
           this.router.navigate(['lista']); 
         });
         console.log("%c data","color:orange;font-size:16px;") 
         console.log(data)
+        this.loading = false;
       },
       (error) => { 
+        if(error.status == 0){
+          this.respuesta = error.error;
+          swal( "Intenta mas tarde..","","error").then(()=>{
+          });
+        }else{
+          this.respuesta = error.error;
+          swal( this.respuesta.message,"","error").then(()=>{
+          });
+        }
         console.log("%c error","color:orange;font-size:16px;")
         console.log(error)
-        this.respuesta$ = error.error;
-        swal( this.respuesta$.message,"","error").then(()=>{
-          //this.router.navigate(['lista']); 
-        });
+        this.loading = false;
     });
   }
 

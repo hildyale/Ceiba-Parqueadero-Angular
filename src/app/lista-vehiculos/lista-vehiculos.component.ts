@@ -12,17 +12,21 @@ export class ListaVehiculosComponent implements OnInit {
 
   vehiculos$: any;
   noResults = false;
+  error = false;
 
   constructor(private vehiculoService: VehiculoService, private router: Router, private detallesServices: DetallesService) { }
 
   ngOnInit() {
     this.vehiculoService.obtenerVehiculos().subscribe(
       data => {
-        
         this.vehiculos$ = data
         if(this.vehiculos$.length === 0){
           this.noResults = true;
         }
+      },
+      error => {
+        console.log(error);
+        this.error = true;
       }
     )
   }
